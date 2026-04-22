@@ -5,11 +5,20 @@
         <field name="model">rfh.vehicle.model</field>
         <field name="inherit_id" ref="rfh_workshop_management.rfh_vehicle_model_form_view"/>
         <field name="arch" type="xml">
+            <sheet position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object"
+                            name="action_view_engines" icon="fa-wrench">
+                        <field name="engine_count"
+                               widget="statinfo" string="Engines"/>
+                    </button>
+                </div>
+            </sheet>
             <group position="after">
                 <notebook>
                     <page string="Engine Variants" name="engines">
                         <field name="engine_ids"
-                               context="{'default_model_id': active_id}">
+                               context="{'default_model_id': id}">
                             <list editable="bottom">
                                 <field name="name"/>
                                 <field name="fuel_type"/>
@@ -26,12 +35,24 @@
 
 
     <!-- ── Form ── -->
-    <record id="view_spare_vehicle_model_form" model="ir.ui.view">
-        <field name="name">spare.vehicle.model.form</field>
-        <field name="model">spare.vehicle.model</field>
+    <record id="view_rfh_vehicle_model_form" model="ir.ui.view">
+        <field name="name">rfh.vehicle.model.form</field>
+        <field name="model">rfh.vehicle.model</field>
         <field name="arch" type="xml">
             <form string="Vehicle Model">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object"
+                                name="action_view_engines"
+                                icon="fa-wrench">
+                            <field name="engine_count" widget="statinfo" string="Engines"/>
+                        </button>
+                        <button class="oe_stat_button" type="object"
+                                name="action_view_parts"
+                                icon="fa-wrench">
+                            <field name="compatibility_count" widget="statinfo" string="Compatible Parts"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <label for="make_id" string="Make"/>
                         <h1>
@@ -73,9 +94,9 @@
     </record>
 
     <!-- ── Search ── -->
-    <record id="view_spare_vehicle_model_search" model="ir.ui.view">
-        <field name="name">spare.vehicle.model.search</field>
-        <field name="model">spare.vehicle.model</field>
+    <record id="view_rfh_vehicle_model_search" model="ir.ui.view">
+        <field name="name">rfh.vehicle.model.search</field>
+        <field name="model">rfh.vehicle.model</field>
         <field name="arch" type="xml">
             <search string="Vehicle Models">
                 <field name="name" string="Model"/>
@@ -96,9 +117,9 @@
     </record>
 
     <!-- ── Action ── -->
-    <record id="action_spare_vehicle_model" model="ir.actions.act_window">
+    <record id="action_rfh_vehicle_model" model="ir.actions.act_window">
         <field name="name">Vehicle Models</field>
-        <field name="res_model">spare.vehicle.model</field>
+        <field name="res_model">rfh.vehicle.model</field>
         <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Add a vehicle model</p>

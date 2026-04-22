@@ -26,7 +26,7 @@
     <record id="view_rfh_job_card_parts_compat_inherit" model="ir.ui.view">
         <field name="name">rfh.job.card.parts.compat.inherit</field>
         <field name="model">rfh.job.card</field>
-        <field name="inherit_id" ref="rfh_workshop_management.view_rfh_job_card_form"/>
+        <field name="inherit_id" ref="rfh_workshop_management.jobcard_view_form"/>
         <field name="arch" type="xml">
 
             <!-- "Find Compatible Parts" button in the header -->
@@ -39,11 +39,13 @@
             </xpath>
 
             <!-- Add compatibility warning column to the parts list -->
-            <xpath expr="//field[@name='part_ids']//field[@name='qty_available']"
-                   position="after">
-                <field name="compatibility_warning"
-                       string="Compatibility"
-                       readonly="1"/>
+            <xpath expr="//field[@name='part_ids']" position="inside">
+                <list editable="bottom">
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="qty_available" widget="float" readonly="1"/>
+                    <field name="compatibility_warning" string="Compatibility" readonly="1"/>
+                </list>
             </xpath>
 
         </field>
