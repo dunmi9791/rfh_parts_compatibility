@@ -1,8 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_spare_vehicle_make_user,spare.vehicle.make.user,model_spare_vehicle_make,group_rfh_parts_user,1,0,0,0
-access_spare_vehicle_make_manager,spare.vehicle.make.manager,model_spare_vehicle_make,group_rfh_parts_manager,1,1,1,1
-access_spare_vehicle_model_user,spare.vehicle.model.user,model_spare_vehicle_model,group_rfh_parts_user,1,0,0,0
-access_spare_vehicle_model_manager,spare.vehicle.model.manager,model_spare_vehicle_model,group_rfh_parts_manager,1,1,1,1
 access_spare_vehicle_engine_user,spare.vehicle.engine.user,model_spare_vehicle_engine,group_rfh_parts_user,1,0,0,0
 access_spare_vehicle_engine_manager,spare.vehicle.engine.manager,model_spare_vehicle_engine,group_rfh_parts_manager,1,1,1,1
 access_spare_product_compatibility_user,spare.product.compatibility.user,model_spare_product_compatibility,group_rfh_parts_user,1,1,1,0

@@ -1,50 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <!--
-        We nest the vehicle catalogue under a "Vehicle Catalogue" sub-menu
-        inside whatever top-level menu rfh_workshop_management creates.
-
-        If your existing module uses a different menu XML ID, replace
-        'rfh_workshop_management.menu_rfh_workshop_root' below with the
-        correct ref from that module.
-    -->
-
-    <!-- Vehicle Catalogue sub-menu -->
-    <menuitem id="menu_rfh_vehicle_catalogue"
-              name="Vehicle Catalogue"
-              parent="rfh_workshop_management.menu_rfh_workshop_root"
-              sequence="50"/>
-
-    <menuitem id="menu_rfh_vehicle_make"
-              name="Makes"
-              parent="menu_rfh_vehicle_catalogue"
-              action="action_spare_vehicle_make"
+    <menuitem id="menu_rfh_vehicle_engine"
+              name="Engine Variants"
+              parent="rfh_workshop_management.menu_settings"
+              action="action_spare_vehicle_engine"
               sequence="10"/>
 
-    <menuitem id="menu_rfh_vehicle_model"
-              name="Models"
-              parent="menu_rfh_vehicle_catalogue"
-              action="action_spare_vehicle_model"
+    <menuitem id="menu_rfh_part_compatibility"
+              name="Part Compatibility Matrix"
+              parent="rfh_workshop_management.menu_settings"
+              action="action_spare_product_compatibility"
               sequence="20"/>
 
-    <menuitem id="menu_rfh_vehicle_engine"
-              name="Engines"
-              parent="menu_rfh_vehicle_catalogue"
-              action="action_spare_vehicle_engine"
-              sequence="30"/>
-
-    <menuitem id="menu_rfh_part_compatibility"
-              name="Compatibility Matrix"
-              parent="menu_rfh_vehicle_catalogue"
-              action="action_spare_product_compatibility"
-              sequence="40"/>
-
-    <!-- Find Parts wizard — accessible from Inventory or Workshop menu -->
     <menuitem id="menu_rfh_part_finder"
               name="Find Parts for Vehicle"
               parent="rfh_workshop_management.menu_rfh_workshop_root"
               action="action_spare_part_finder"
-              sequence="60"/>
-
+              sequence="55"/>
 </odoo>

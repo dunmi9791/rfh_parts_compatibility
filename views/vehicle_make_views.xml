@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <!-- ── List ── -->
-    <record id="view_spare_vehicle_make_list" model="ir.ui.view">
-        <field name="name">spare.vehicle.make.list</field>
-        <field name="model">spare.vehicle.make</field>
+    <record id="view_rfh_vehicle_make_compat_inherit" model="ir.ui.view">
+        <field name="name">rfh.vehicle.make.compat.inherit</field>
+        <field name="model">rfh.vehicle.make</field>
+        <field name="inherit_id" ref="rfh_workshop_management.rfh_vehicle_make_form_view"/>
         <field name="arch" type="xml">
-            <list string="Vehicle Makes">
-                <field name="name"/>
-                <field name="model_count" string="Models"/>
-            </list>
+            <sheet position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object"
+                            name="action_view_models" icon="fa-wrench">
+                        <field name="compatibility_count"
+                               widget="statinfo" string="Compatible Parts"/>
+                    </button>
+                </div>
+            </sheet>
         </field>
     </record>
 

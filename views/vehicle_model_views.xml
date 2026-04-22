@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <!-- ── List ── -->
-    <record id="view_spare_vehicle_model_list" model="ir.ui.view">
-        <field name="name">spare.vehicle.model.list</field>
-        <field name="model">spare.vehicle.model</field>
+    <record id="view_rfh_vehicle_model_engine_inherit" model="ir.ui.view">
+        <field name="name">rfh.vehicle.model.engine.inherit</field>
+        <field name="model">rfh.vehicle.model</field>
+        <field name="inherit_id" ref="rfh_workshop_management.rfh_vehicle_model_form_view"/>
         <field name="arch" type="xml">
-            <list string="Vehicle Models">
-                <field name="make_id" string="Make"/>
-                <field name="name" string="Model"/>
-                <field name="body_type"/>
-                <field name="year_from"/>
-                <field name="year_to"/>
-                <field name="engine_count" string="Engines"/>
-            </list>
+            <group position="after">
+                <notebook>
+                    <page string="Engine Variants" name="engines">
+                        <field name="engine_ids"
+                               context="{'default_model_id': active_id}">
+                            <list editable="bottom">
+                                <field name="name"/>
+                                <field name="fuel_type"/>
+                                <field name="displacement"/>
+                                <field name="cylinders"/>
+                                <field name="power_hp"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </group>
         </field>
     </record>
+
 
     <!-- ── Form ── -->
     <record id="view_spare_vehicle_model_form" model="ir.ui.view">
@@ -97,5 +105,6 @@
             <p>e.g. Toyota Hilux, Honda Civic…</p>
         </field>
     </record>
+
 
 </odoo>

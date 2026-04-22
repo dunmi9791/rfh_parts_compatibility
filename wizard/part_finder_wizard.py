@@ -4,110 +4,109 @@ from odoo.exceptions import UserError
 
 
 class PartFinderWizard(models.TransientModel):
-    """
-    "Find Parts for Vehicle" wizard.
-    Select a make / model / engine / year and get back every product
-    that has a matching compatibility entry.
-    Can be launched standalone or from a repair/job-card record.
-    """
-    _name = 'spare.part.finder'
-    _description = 'Find Parts for Vehicle'
+    """Find Parts for Vehicle wizard. Auto-fills from job card context."""
+    _name = "spare.part.finder"
+    _description = "Find Parts for Vehicle"
 
-    # ── Filters ───────────────────────────────────────────────────────────────
-    vehicle_make_id = fields.Many2one(
-        'spare.vehicle.make', string='Make', required=True,
-    )
-    vehicle_model_id = fields.Many2one(
-        'spare.vehicle.model', string='Model',
-        domain="[('make_id', '=', vehicle_make_id)]",
-    )
-    engine_id = fields.Many2one(
-        'spare.vehicle.engine', string='Engine',
-        domain="[('model_id', '=', vehicle_model_id)]",
-    )
-    year = fields.Integer(
-        string='Year',
-        help='Enter the vehicle year to narrow results (leave 0 for all years)',
-    )
-    category_id = fields.Many2one(
-        'product.category', string='Part Category',
-        help='Optionally filter by product category',
-    )
+    vehicle_id = fields.Many2one("rfh.vehicle", string="Vehicle",
+        help="Select a registered vehicle to auto-fill make/model/engine.")
+    job_card_id = fields.Many2one("rfh.job.card", string="Job Card")
 
-    # ── Results (read-only) ───────────────────────────────────────────────────
-    result_count = fields.Integer(
-        string='Parts Found', compute='_compute_result_count',
-    )
+    vehicle_make_id  = fields.Many2one("rfh.vehicle.make",  string="Make",  required=True)
+    vehicle_model_id = fields.Many2one("rfh.vehicle.model", string="Model",
+        domain="[('make_id', '=', vehicle_make_id)]")
+    engine_id = fields.Many2one("spare.vehicle.engine", string="Engine",
+        domain="[('model_id', '=', vehicle_model_id)]")
+    year = fields.Integer(string="Year", help="0 = all years")
+    category_id = fields.Many2one("product.category", string="Part Category")
 
-    @api.depends('vehicle_make_id', 'vehicle_model_id', 'engine_id', 'year', 'category_id')
-    def _compute_result_count(self):
-        for wiz in self:
-            wiz.result_count = len(wiz._get_domain())
+    @api.onchange("vehicle_id")
+    def _onchange_vehicle(self):
+        if self.vehicle_id:
+            self.vehicle_make_id  = self.vehicle_id.make_id
+            self.vehicle_model_id = self.vehicle_id.model_id
+            self.engine_id        = self.vehicle_id.engine_id
+            self.year = int(self.vehicle_id.year) if self.vehicle_id.year else 0
 
-    # ── Onchange cascades ─────────────────────────────────────────────────────
-    @api.onchange('vehicle_make_id')
+    @api.onchange("job_card_id")
+    def _onchange_job_card(self):
+        if self.job_card_id and self.job_card_id.vehicle_id:
+            self.vehicle_id = self.job_card_id.vehicle_id
+            self._onchange_vehicle()
+
+    @api.onchange("vehicle_make_id")
     def _onchange_make(self):
-        self.vehicle_model_id = False
-        self.engine_id = False
+        if not self.vehicle_id:
+            self.vehicle_model_id = False
+            self.engine_id = False
 
-    @api.onchange('vehicle_model_id')
+    @api.onchange("vehicle_model_id")
     def _onchange_model(self):
-        self.engine_id = False
+        if not self.vehicle_id:
+            self.engine_id = False
 
-    # ── Domain builder ────────────────────────────────────────────────────────
-    def _get_domain(self):
-        """Return list of product.template ids that match the current filters."""
+    @api.model
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        ctx = self.env.context
+        if ctx.get("default_vehicle_make_id"):
+            res["vehicle_make_id"] = ctx["default_vehicle_make_id"]
+        if ctx.get("default_vehicle_model_id"):
+            res["vehicle_model_id"] = ctx["default_vehicle_model_id"]
+        if ctx.get("default_engine_id"):
+            res["engine_id"] = ctx["default_engine_id"]
+        if ctx.get("default_year"):
+            res["year"] = ctx["default_year"]
+        if ctx.get("default_job_card_id"):
+            res["job_card_id"] = ctx["default_job_card_id"]
+        return res
+
+    def _get_compatible_product_ids(self):
         self.ensure_one()
         if not self.vehicle_make_id:
             return []
-
-        compat_domain = [
-            ('vehicle_make_id', '=', self.vehicle_make_id.id),
-        ]
+        domain = [("vehicle_make_id", "=", self.vehicle_make_id.id)]
         if self.vehicle_model_id:
-            compat_domain += [('vehicle_model_id', '=', self.vehicle_model_id.id)]
+            domain += ["|",
+                ("vehicle_model_id", "=", False),
+                ("vehicle_model_id", "=", self.vehicle_model_id.id)]
         if self.engine_id:
-            compat_domain += [('engine_id', '=', self.engine_id.id)]
+            domain += ["|",
+                ("engine_id", "=", False),
+                ("engine_id", "=", self.engine_id.id)]
         if self.year:
-            compat_domain += [
-                '|', ('year_from', '=', 0), ('year_from', '<=', self.year),
-                '|', ('year_to', '=', 0),   ('year_to', '>=', self.year),
+            domain += [
+                "|", ("year_from", "=", 0), ("year_from", "<=", self.year),
+                "|", ("year_to",   "=", 0), ("year_to",   ">=", self.year),
             ]
-
-        compat_records = self.env['spare.product.compatibility'].search(compat_domain)
-        tmpl_ids = compat_records.mapped('product_tmpl_id').ids
-
-        # Apply category filter on top
-        prod_domain = [('id', 'in', tmpl_ids)]
+        compat = self.env["spare.product.compatibility"].search(domain)
+        tmpl_ids = compat.mapped("product_tmpl_id").ids
+        prod_domain = [("id", "in", tmpl_ids)]
         if self.category_id:
-            # Include child categories
-            cat_ids = self.env['product.category'].search(
-                [('id', 'child_of', self.category_id.id)]
+            cat_ids = self.env["product.category"].search(
+                [("id", "child_of", self.category_id.id)]
             ).ids
-            prod_domain += [('categ_id', 'in', cat_ids)]
+            prod_domain += [("categ_id", "in", cat_ids)]
+        return self.env["product.template"].search(prod_domain).ids
 
-        return self.env['product.template'].search(prod_domain).ids
-
-    # ── Actions ───────────────────────────────────────────────────────────────
     def action_find_parts(self):
-        """Open product list filtered to compatible parts."""
         self.ensure_one()
-        tmpl_ids = self._get_domain()
+        tmpl_ids = self._get_compatible_product_ids()
+        label = self.vehicle_make_id.name
+        if self.vehicle_model_id:
+            label += " %s" % self.vehicle_model_id.name
+        if self.year:
+            label += " (%s)" % self.year
         if not tmpl_ids:
             raise UserError(
-                f'No parts found for {self.vehicle_make_id.name}'
-                + (f' {self.vehicle_model_id.name}' if self.vehicle_model_id else '')
-                + (f' ({self.year})' if self.year else '')
-                + '. Check the Vehicle Compatibility tab on your products.'
+                "No parts found for %s.\n\n"
+                "Add compatibility entries on the product's "
+                "Vehicle Compatibility tab first." % label
             )
         return {
-            'type': 'ir.actions.act_window',
-            'name': 'Compatible Parts',
-            'res_model': 'product.template',
-            'view_mode': 'list,kanban,form',
-            'domain': [('id', 'in', tmpl_ids)],
-            'context': {
-                'search_default_filter_to_sell': 0,
-                'search_default_filter_to_purchase': 0,
-            },
+            "type": "ir.actions.act_window",
+            "name": "Compatible Parts - %s" % label,
+            "res_model": "product.template",
+            "view_mode": "list,kanban,form",
+            "domain": [("id", "in", tmpl_ids)],
         }

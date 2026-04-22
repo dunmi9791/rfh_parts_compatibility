@@ -1,56 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <!-- ── Wizard Form ── -->
     <record id="view_spare_part_finder_form" model="ir.ui.view">
         <field name="name">spare.part.finder.form</field>
         <field name="model">spare.part.finder</field>
         <field name="arch" type="xml">
             <form string="Find Parts for Vehicle">
                 <sheet>
-                    <div class="oe_title">
-                        <h1>Find Compatible Parts</h1>
-                        <p class="text-muted">
-                            Select the vehicle details below. Only parts with a
-                            matching compatibility entry will appear in the results.
-                        </p>
-                    </div>
-                    <group>
-                        <group string="Vehicle">
-                            <field name="vehicle_make_id"
-                                   options="{'no_create': True}"
-                                   placeholder="e.g. Toyota"/>
-                            <field name="vehicle_model_id"
-                                   options="{'no_create': True}"
-                                   domain="[('make_id','=',vehicle_make_id)]"
-                                   placeholder="e.g. Hilux"/>
-                            <field name="engine_id"
-                                   options="{'no_create': True}"
-                                   domain="[('model_id','=',vehicle_model_id)]"
-                                   placeholder="Optional — leave blank for all engines"/>
-                            <field name="year" placeholder="e.g. 2019 (0 = all years)"/>
+                    <div class="oe_title"><h1>Find Compatible Parts</h1></div>
+                    <group string="Quick Pick">
+                        <field name="vehicle_id" options='{"no_create": true}'
+                               placeholder="Select a vehicle to auto-fill..."/>
+                        <field name="job_card_id" invisible="1"/>
+                    </group>
+                    <group string="Vehicle Details">
+                        <group>
+                            <field name="vehicle_make_id"  options='{"no_create": true}'/>
+                            <field name="vehicle_model_id" options='{"no_create": true}'
+                                   domain="[('make_id','=',vehicle_make_id)]"/>
+                            <field name="engine_id" options='{"no_create": true}'
+                                   domain="[('model_id','=',vehicle_model_id)]"/>
                         </group>
-                        <group string="Filter (Optional)">
-                            <field name="category_id"
-                                   options="{'no_create': True}"
-                                   placeholder="e.g. Workshop Parts / Physical Parts"/>
+                        <group>
+                            <field name="year" placeholder="0 = all years"/>
+                            <field name="category_id" options='{"no_create": true}'/>
                         </group>
                     </group>
                 </sheet>
                 <footer>
-                    <button string="Search Parts"
-                            name="action_find_parts"
-                            type="object"
-                            class="btn-primary"/>
-                    <button string="Cancel"
-                            class="btn-secondary"
-                            special="cancel"/>
+                    <button string="Search Compatible Parts"
+                            name="action_find_parts" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
 
-    <!-- ── Wizard Action (standalone) ── -->
     <record id="action_spare_part_finder" model="ir.actions.act_window">
         <field name="name">Find Parts for Vehicle</field>
         <field name="res_model">spare.part.finder</field>
@@ -58,5 +42,4 @@
         <field name="view_id" ref="view_spare_part_finder_form"/>
         <field name="target">new</field>
     </record>
-
 </odoo>
