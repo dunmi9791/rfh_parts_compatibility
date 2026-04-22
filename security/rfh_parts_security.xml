@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- ── Groups ── -->
+    <record id="group_rfh_parts_user" model="res.groups">
+        <field name="name">Parts User</field>
+        <field name="category_id" ref="base.module_category_manufacturing"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can view and edit vehicle catalogue and compatibility entries.</field>
+    </record>
+
+    <record id="group_rfh_parts_manager" model="res.groups">
+        <field name="name">Parts Manager</field>
+        <field name="category_id" ref="base.module_category_manufacturing"/>
+        <field name="implied_ids" eval="[(4, ref('group_rfh_parts_user'))]"/>
+        <field name="comment">Can create/delete vehicle makes, models, and engines.</field>
+    </record>
+
+</odoo>

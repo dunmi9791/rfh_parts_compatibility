@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ── List ── -->
+    <record id="view_spare_vehicle_model_list" model="ir.ui.view">
+        <field name="name">spare.vehicle.model.list</field>
+        <field name="model">spare.vehicle.model</field>
+        <field name="arch" type="xml">
+            <list string="Vehicle Models">
+                <field name="make_id" string="Make"/>
+                <field name="name" string="Model"/>
+                <field name="body_type"/>
+                <field name="year_from"/>
+                <field name="year_to"/>
+                <field name="engine_count" string="Engines"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ── Form ── -->
+    <record id="view_spare_vehicle_model_form" model="ir.ui.view">
+        <field name="name">spare.vehicle.model.form</field>
+        <field name="model">spare.vehicle.model</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle Model">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="make_id" string="Make"/>
+                        <h1>
+                            <field name="make_id" placeholder="Select make…"
+                                   options="{'no_create': True}"/>
+                        </h1>
+                        <label for="name" string="Model"/>
+                        <h2><field name="name" placeholder="e.g. Hilux"/></h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="body_type"/>
+                            <field name="year_from"/>
+                            <field name="year_to" placeholder="0 = current production"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Engine Variants" name="engines">
+                            <field name="engine_ids" context="{'default_model_id': active_id}">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="fuel_type"/>
+                                    <field name="displacement"/>
+                                    <field name="cylinders"/>
+                                    <field name="power_hp"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ── Search ── -->
+    <record id="view_spare_vehicle_model_search" model="ir.ui.view">
+        <field name="name">spare.vehicle.model.search</field>
+        <field name="model">spare.vehicle.model</field>
+        <field name="arch" type="xml">
+            <search string="Vehicle Models">
+                <field name="name" string="Model"/>
+                <field name="make_id" string="Make"/>
+                <filter string="Toyota"  name="toyota"  domain="[('make_id.name','=','Toyota')]"/>
+                <filter string="Honda"   name="honda"   domain="[('make_id.name','=','Honda')]"/>
+                <filter string="Nissan"  name="nissan"  domain="[('make_id.name','=','Nissan')]"/>
+                <separator/>
+                <filter string="Archived" name="archived" domain="[('active','=',False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Make" name="group_make"
+                            context="{'group_by': 'make_id'}"/>
+                    <filter string="Body Type" name="group_body"
+                            context="{'group_by': 'body_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ── Action ── -->
+    <record id="action_spare_vehicle_model" model="ir.actions.act_window">
+        <field name="name">Vehicle Models</field>
+        <field name="res_model">spare.vehicle.model</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add a vehicle model</p>
+            <p>e.g. Toyota Hilux, Honda Civic…</p>
+        </field>
+    </record>
+
+</odoo>

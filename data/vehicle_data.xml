@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- ════════════════════════════════════════════
+         MAKES
+    ════════════════════════════════════════════ -->
+    <record id="make_toyota"   model="spare.vehicle.make"><field name="name">Toyota</field></record>
+    <record id="make_honda"    model="spare.vehicle.make"><field name="name">Honda</field></record>
+    <record id="make_nissan"   model="spare.vehicle.make"><field name="name">Nissan</field></record>
+    <record id="make_ford"     model="spare.vehicle.make"><field name="name">Ford</field></record>
+    <record id="make_mercedes" model="spare.vehicle.make"><field name="name">Mercedes-Benz</field></record>
+    <record id="make_hyundai"  model="spare.vehicle.make"><field name="name">Hyundai</field></record>
+    <record id="make_kia"      model="spare.vehicle.make"><field name="name">Kia</field></record>
+    <record id="make_lexus"    model="spare.vehicle.make"><field name="name">Lexus</field></record>
+
+
+    <!-- ════════════════════════════════════════════
+         TOYOTA MODELS
+    ════════════════════════════════════════════ -->
+    <record id="model_toyota_hilux" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Hilux</field>
+        <field name="body_type">pickup</field>
+        <field name="year_from">2005</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_toyota_landcruiser_prado" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Land Cruiser Prado</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2003</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_toyota_landcruiser_200" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Land Cruiser 200</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2008</field>
+        <field name="year_to">2021</field>
+    </record>
+
+    <record id="model_toyota_fortuner" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Fortuner</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2005</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_toyota_camry" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Camry</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2002</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_toyota_corolla" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Corolla</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2002</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_toyota_hiace" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Hiace</field>
+        <field name="body_type">van</field>
+        <field name="year_from">2005</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_toyota_avensis" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Avensis</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2003</field>
+        <field name="year_to">2019</field>
+    </record>
+
+    <record id="model_toyota_rav4" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">RAV4</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2006</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_toyota_yaris" model="spare.vehicle.model">
+        <field name="make_id" ref="make_toyota"/>
+        <field name="name">Yaris</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2006</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <!-- ── Toyota Hilux Engines ── -->
+    <record id="eng_hilux_2gd" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_hilux"/>
+        <field name="name">2.4L 2GD-FTV Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">2.4</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">150</field>
+    </record>
+
+    <record id="eng_hilux_1gd" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_hilux"/>
+        <field name="name">2.8L 1GD-FTV Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">2.8</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">177</field>
+    </record>
+
+    <record id="eng_hilux_2tr" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_hilux"/>
+        <field name="name">2.7L 2TR-FE Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">2.7</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">160</field>
+    </record>
+
+    <record id="eng_hilux_1kd" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_hilux"/>
+        <field name="name">3.0L 1KD-FTV Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">3.0</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">163</field>
+    </record>
+
+    <!-- ── Prado Engines ── -->
+    <record id="eng_prado_1gd" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_landcruiser_prado"/>
+        <field name="name">2.8L 1GD-FTV Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">2.8</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">177</field>
+    </record>
+
+    <record id="eng_prado_1kd" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_landcruiser_prado"/>
+        <field name="name">3.0L 1KD-FTV Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">3.0</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">163</field>
+    </record>
+
+    <record id="eng_prado_4gr" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_landcruiser_prado"/>
+        <field name="name">4.0L 1GR-FE V6 Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">4.0</field>
+        <field name="cylinders">6</field>
+        <field name="power_hp">282</field>
+    </record>
+
+    <!-- ── Camry Engines ── -->
+    <record id="eng_camry_2ar" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_camry"/>
+        <field name="name">2.5L 2AR-FE Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">2.5</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">181</field>
+    </record>
+
+    <record id="eng_camry_2az" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_camry"/>
+        <field name="name">2.4L 2AZ-FE Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">2.4</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">167</field>
+    </record>
+
+    <!-- ── Hiace Engines ── -->
+    <record id="eng_hiace_2kd" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_hiace"/>
+        <field name="name">2.5L 2KD-FTV Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">2.5</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">102</field>
+    </record>
+
+    <record id="eng_hiace_1tr" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_toyota_hiace"/>
+        <field name="name">2.0L 1TR-FE Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">2.0</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">136</field>
+    </record>
+
+
+    <!-- ════════════════════════════════════════════
+         HONDA MODELS
+    ════════════════════════════════════════════ -->
+    <record id="model_honda_civic" model="spare.vehicle.model">
+        <field name="make_id" ref="make_honda"/>
+        <field name="name">Civic</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2006</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_honda_accord" model="spare.vehicle.model">
+        <field name="make_id" ref="make_honda"/>
+        <field name="name">Accord</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2003</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_honda_crv" model="spare.vehicle.model">
+        <field name="make_id" ref="make_honda"/>
+        <field name="name">CR-V</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2007</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_honda_hrv" model="spare.vehicle.model">
+        <field name="make_id" ref="make_honda"/>
+        <field name="name">HR-V</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2015</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_honda_pilot" model="spare.vehicle.model">
+        <field name="make_id" ref="make_honda"/>
+        <field name="name">Pilot</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2009</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_honda_odyssey" model="spare.vehicle.model">
+        <field name="make_id" ref="make_honda"/>
+        <field name="name">Odyssey</field>
+        <field name="body_type">van</field>
+        <field name="year_from">2005</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <!-- ── Honda Civic Engines ── -->
+    <record id="eng_civic_r18" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_honda_civic"/>
+        <field name="name">1.8L R18A Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">1.8</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">140</field>
+    </record>
+
+    <record id="eng_civic_l15" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_honda_civic"/>
+        <field name="name">1.5L L15B7 VTEC Turbo Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">1.5</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">174</field>
+    </record>
+
+    <!-- ── Honda Accord Engines ── -->
+    <record id="eng_accord_k24" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_honda_accord"/>
+        <field name="name">2.4L K24A Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">2.4</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">190</field>
+    </record>
+
+    <record id="eng_accord_j30" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_honda_accord"/>
+        <field name="name">3.0L J30A V6 Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">3.0</field>
+        <field name="cylinders">6</field>
+        <field name="power_hp">244</field>
+    </record>
+
+
+    <!-- ════════════════════════════════════════════
+         NISSAN MODELS
+    ════════════════════════════════════════════ -->
+    <record id="model_nissan_patrol" model="spare.vehicle.model">
+        <field name="make_id" ref="make_nissan"/>
+        <field name="name">Patrol</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2004</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_nissan_pathfinder" model="spare.vehicle.model">
+        <field name="make_id" ref="make_nissan"/>
+        <field name="name">Pathfinder</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2005</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_nissan_xterra" model="spare.vehicle.model">
+        <field name="make_id" ref="make_nissan"/>
+        <field name="name">X-Terra</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2005</field>
+        <field name="year_to">2015</field>
+    </record>
+
+    <record id="model_nissan_altima" model="spare.vehicle.model">
+        <field name="make_id" ref="make_nissan"/>
+        <field name="name">Altima</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2007</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_nissan_sentra" model="spare.vehicle.model">
+        <field name="make_id" ref="make_nissan"/>
+        <field name="name">Sentra</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2013</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_nissan_navara" model="spare.vehicle.model">
+        <field name="make_id" ref="make_nissan"/>
+        <field name="name">Navara</field>
+        <field name="body_type">pickup</field>
+        <field name="year_from">2005</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <!-- ── Nissan Patrol Engines ── -->
+    <record id="eng_patrol_vk56" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_nissan_patrol"/>
+        <field name="name">5.6L VK56VD V8 Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">5.6</field>
+        <field name="cylinders">8</field>
+        <field name="power_hp">400</field>
+    </record>
+
+    <record id="eng_patrol_zd30" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_nissan_patrol"/>
+        <field name="name">3.0L ZD30DDTi Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">3.0</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">158</field>
+    </record>
+
+    <record id="eng_patrol_tb48" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_nissan_patrol"/>
+        <field name="name">4.8L TB48DE Petrol</field>
+        <field name="fuel_type">petrol</field>
+        <field name="displacement">4.8</field>
+        <field name="cylinders">6</field>
+        <field name="power_hp">272</field>
+    </record>
+
+
+    <!-- ════════════════════════════════════════════
+         FORD MODELS
+    ════════════════════════════════════════════ -->
+    <record id="model_ford_ranger" model="spare.vehicle.model">
+        <field name="make_id" ref="make_ford"/>
+        <field name="name">Ranger</field>
+        <field name="body_type">pickup</field>
+        <field name="year_from">2011</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_ford_explorer" model="spare.vehicle.model">
+        <field name="make_id" ref="make_ford"/>
+        <field name="name">Explorer</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2011</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_ford_escape" model="spare.vehicle.model">
+        <field name="make_id" ref="make_ford"/>
+        <field name="name">Escape / Kuga</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2013</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <!-- ── Ford Ranger Engines ── -->
+    <record id="eng_ranger_tdci_22" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_ford_ranger"/>
+        <field name="name">2.2L TDCi Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">2.2</field>
+        <field name="cylinders">4</field>
+        <field name="power_hp">160</field>
+    </record>
+
+    <record id="eng_ranger_tdci_32" model="spare.vehicle.engine">
+        <field name="model_id" ref="model_ford_ranger"/>
+        <field name="name">3.2L TDCi Diesel</field>
+        <field name="fuel_type">diesel</field>
+        <field name="displacement">3.2</field>
+        <field name="cylinders">5</field>
+        <field name="power_hp">197</field>
+    </record>
+
+
+    <!-- ════════════════════════════════════════════
+         HYUNDAI MODELS
+    ════════════════════════════════════════════ -->
+    <record id="model_hyundai_elantra" model="spare.vehicle.model">
+        <field name="make_id" ref="make_hyundai"/>
+        <field name="name">Elantra</field>
+        <field name="body_type">sedan</field>
+        <field name="year_from">2011</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_hyundai_tucson" model="spare.vehicle.model">
+        <field name="make_id" ref="make_hyundai"/>
+        <field name="name">Tucson</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2009</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_hyundai_santafe" model="spare.vehicle.model">
+        <field name="make_id" ref="make_hyundai"/>
+        <field name="name">Santa Fe</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2007</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_hyundai_ix35" model="spare.vehicle.model">
+        <field name="make_id" ref="make_hyundai"/>
+        <field name="name">iX35</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2010</field>
+        <field name="year_to">2017</field>
+    </record>
+
+
+    <!-- ════════════════════════════════════════════
+         LEXUS MODELS
+    ════════════════════════════════════════════ -->
+    <record id="model_lexus_lx570" model="spare.vehicle.model">
+        <field name="make_id" ref="make_lexus"/>
+        <field name="name">LX 570</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2008</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_lexus_gx460" model="spare.vehicle.model">
+        <field name="make_id" ref="make_lexus"/>
+        <field name="name">GX 460</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2010</field>
+        <field name="year_to">0</field>
+    </record>
+
+    <record id="model_lexus_rx350" model="spare.vehicle.model">
+        <field name="make_id" ref="make_lexus"/>
+        <field name="name">RX 350</field>
+        <field name="body_type">suv</field>
+        <field name="year_from">2010</field>
+        <field name="year_to">0</field>
+    </record>
+
+</odoo>
