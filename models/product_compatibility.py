@@ -29,7 +29,7 @@ class ProductCompatibility(models.Model):
         "spare.vehicle.engine",
         string="Engine",
         domain="[('model_id', '=', vehicle_model_id)]",
-        ondelete="restrict",
+        ondelete="set null",
     )
     year_from = fields.Integer(string="Year From")
     year_to   = fields.Integer(string="Year To", help="0 = current production")
