@@ -45,7 +45,7 @@
                     </group>
                     <notebook>
                         <page string="Engine Variants" name="engines">
-                            <field name="engine_ids" context="{'default_model_id': active_id}">
+                            <field name="engine_ids" context="{'default_model_id': id}">
                                 <list editable="bottom">
                                     <field name="name"/>
                                     <field name="fuel_type"/>

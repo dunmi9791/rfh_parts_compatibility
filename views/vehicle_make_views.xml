@@ -37,7 +37,7 @@
                     </group>
                     <notebook>
                         <page string="Models" name="models">
-                            <field name="model_ids" context="{'default_make_id': active_id}">
+                            <field name="model_ids" context="{'default_make_id': id}">
                                 <list editable="bottom">
                                     <field name="name"/>
                                     <field name="body_type"/>
